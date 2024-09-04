@@ -1,16 +1,18 @@
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse, PlainTextResponse
+from fastapi.responses import FileResponse
 
 app = FastAPI()
 
-@app.get("/text", response_class = PlainTextResponse)
-def root_text():
-	return "Hello from fastapi!"
+
+# @app.get("/")
+# def root():
+# 	return FileResponse("index.html")
+
+# @app.get("/file", response_class = FileResponse)
+# def root_html():
+# 	return "index.html"
 	
-
-
-@app.get("/html", response_class = HTMLResponse)
-def root_html():
-	return "<h1>Hello world fastapi</h1>"
-
+@app.get("/")
+def root():
+	return FileResponse("index.html", filename="mainpage.html", media_type="application/octet-stream")
 
