@@ -1,27 +1,18 @@
-from fastapi import FastAPI, Query, Path
-
+from fastapi import FastAPI, Response, Path
 
 app = FastAPI()
 
 
-# @app.get("/users")
-# def get_model(name:str, age:int):
-# 	return {"user_name": name, "user_age": age}
 
-# @app.get("/users")
-# def users(name:str = Query(min_length=3, max_length=20)):
-# 	return {"name": name}
 
-# @app.get("/users")
-# def users(name:str = Query(min_length=3, max_length=20), 
-# 			age:int = Query(ge=18, lt=111)):
-# 	return {"name": name, "age": age}
+# @app.get("/notfound", status_code=404) 
+# def notfound():
+#   return {"message": "Resource not found."}
 
-# @app.get("/users")
-# def users(people: list[str] = Query()):
-# 	return {"people": people}
+@app.get("users/{id}", status_code=200)
+def users(response: Response, id: int = Path()):
+    if id<1:
+        response.status_code = 400
+        return {"message": "Incorrect data"}
+    return {"message": f"id = {id}"}
 
-@app.get("/users/{name}")
-def users(name:str = Path(min_length=3, max_length=20),
-			age:int = Query(ge=18, lt=111)):
-	return {"name": name, "age": age}
