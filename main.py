@@ -14,6 +14,6 @@ def root():
     return FileResponse("public/index.html")
 
 @app.post("/hello")
-def hello(person: Person):
-    return {"message": f"Hello, {person.name}! Your age is {person.age}."}
+def hello(people: list[Person]):
+    return {"message": people}
 

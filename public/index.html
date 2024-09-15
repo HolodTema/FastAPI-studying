@@ -27,10 +27,13 @@
                         "Accept": "application/json",
                          "Content-Type": "application/json"
                         },
-                    body: JSON.stringify({
-                        name: username,
-                        age: userage
-                    })
+                    body: JSON.stringify(
+                        [
+                            {name: "Tom", age: 38},
+                            {name: "Bob", age: 20},
+                            {name: "Kate", age: 25}
+                        ]
+                    )
                 });
 
                 if(response.ok) {
