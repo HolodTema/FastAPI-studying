@@ -1,18 +1,17 @@
-from fastapi import FastAPI, Response, Path
+import mimetypes
+from fastapi import FastAPI
+from fastapi.responses import RedirectResponse, PlainTextResponse
 
 app = FastAPI()
 
+@app.get("/old")
+def old():
+    return RedirectResponse("/new", status_code=302)
+
+@app.get("/new")
+def new():
+    return PlainTextResponse("The new page.")
 
 
 
-# @app.get("/notfound", status_code=404) 
-# def notfound():
-#   return {"message": "Resource not found."}
-
-@app.get("users/{id}", status_code=200)
-def users(response: Response, id: int = Path()):
-    if id<1:
-        response.status_code = 400
-        return {"message": "Incorrect data"}
-    return {"message": f"id = {id}"}
 
